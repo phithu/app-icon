@@ -25,7 +25,9 @@ module.exports = async function generate(parameters) {
 
   const iconSets = await findIconsetFolders(searchRoot);
   await Promise.all(iconSets.map(async (iconset) => {
-    if (!platforms.includes('ios')) return null;
+    if (!platforms.includes('ios')) {
+      return null;
+    }
     console.log(`Found iOS iconset: ${iconset}...`);
 
     const { icons } = await generateIconsetIcons(sourceIcon, iconset);
@@ -38,8 +40,15 @@ module.exports = async function generate(parameters) {
   }));
 
   const manifests = await findAndroidManifests(searchRoot);
+  console.log("manifests",manifests)
   await Promise.all(manifests.map(async (manifest) => {
-    if (!platforms.includes('android')) return null;
+    if (!platforms.includes('android')) {
+      return null;
+    }
+    // Skip debug
+    if(manifest.includes('debug')) {
+      return null;
+    }
     console.log(`Found Android Manifest: ${manifest}...`);
 
     const manResult = await generateManifestIcons(sourceIcon, manifest);
