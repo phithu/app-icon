@@ -1,11 +1,15 @@
 const path = require('path');
 const fs = require('fs');
 const { promisify } = require('util');
+const imagemagickCli = require('imagemagick-cli');
+const contentsTemplate = require('./AppIcon.iconset.Contents.template.json');
 
 const writeFileAsync = promisify(fs.writeFile);
+const BORDER_SIZE = 9;
 
-const resizeImage = require('../resize/resize-image');
-const contentsTemplate = require('./AppIcon.iconset.Contents.template.json');
+async function resizeImage(source, target, size) {
+  return imagemagickCli.exec(`convert "${source}" -resize ${size} -gravity center -bordercolor white -border ${BORDER_SIZE}x${BORDER_SIZE} -background white -strip "${target}"`);
+};
 
 //  Generate xCode icons given an iconset folder.
 module.exports = async function generateIconSetIcons(sourceIcon, iconset) {
@@ -24,8 +28,13 @@ module.exports = async function generateIconSetIcons(sourceIcon, iconset) {
   await Promise.all(contentsTemplate.images.map(async (image) => {
     const targetName = `${image.idiom}-${image.size}-${image.scale}.png`;
     const targetPath = path.join(iconset, targetName);
+
     const targetScale = parseInt(image.scale.slice(0, 1), 10);
-    const targetSize = image.size.split('x').map((p) => p * targetScale).join('x');
+
+    const targetSize = image.size.split('x').
+      map((p) => Math.round(p * targetScale) - BORDER_SIZE * 2).
+      join('x');
+
     await resizeImage(sourceIcon, targetPath, targetSize);
     results.icons.push(targetName);
     contents.images.push({
