@@ -9,11 +9,8 @@ module.exports = async function generate(parameters) {
   //  Validate and coerce the parameters.
   const {
     sourceIcon,
-    backgroundIcon,
-    foregroundIcon,
     searchRoot,
     platforms,
-    adaptiveIcons,
   } = validateParameters(parameters || {});
 
   //  Set up the results object.
@@ -45,7 +42,7 @@ module.exports = async function generate(parameters) {
     if (!platforms.includes('android')) {
       return null;
     }
-    // Skip debug
+    // skip debug
     if(manifest.includes('debug')) {
       return null;
     }
