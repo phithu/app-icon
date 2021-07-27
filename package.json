@@ -1,6 +1,6 @@
 {
-  "name": "app-icon",
-  "version": "0.13.2",
+  "name": "@npt/generate-app-icons",
+  "version": "1.0.0",
   "description": "Automatic icon resizing for Mobile Apps. Supports Native, Cordova and React Native. Inspired by cordova-icon.",
   "main": "./src/index.js",
   "engines": {
@@ -33,9 +33,9 @@
   "author": "Dave Kerr",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dwmkerr/app-icon/issues"
+    "url": "https://github.com/phithu/app-icon/issues"
   },
-  "homepage": "https://github.com/dwmkerr/app-icon#readme",
+  "homepage": "https://github.com/phithu/app-icon#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.1.0",

@@ -8,27 +8,27 @@ Icon management for Mobile Apps. Create icons, generate all required sizes, labe
 
 <!-- vim-markdown-toc GFM -->
 
-* [Introduction](#introduction)
-* [Installation](#installation)
-* [Usage](#usage)
-    * [Initialising](#initialising)
-    * [Generating Icons](#generating-icons)
-    * [Labelling Icons](#labelling-icons)
-    * [Adaptive Icons](#adaptive-icons)
-* [Developer Guide](#developer-guide)
-    * [Initial Setup](#initial-setup)
-    * [Running Tests](#running-tests)
-    * [Commit Messages](#commit-messages)
-    * [Creating a Release](#creating-a-release)
-    * [Builds](#builds)
-    * [Debugging](#debugging)
-* [The Sample Projects](#the-sample-projects)
-    * [React Native](#react-native)
-    * [Cordova](#cordova)
-    * [Native](#native)
-* [Compatibility](#compatibility)
-* [Troubleshooting](#troubleshooting)
-* [License](#license)
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Initialising](#initialising)
+  - [Generating Icons](#generating-icons)
+  - [Labelling Icons](#labelling-icons)
+  - [Adaptive Icons](#adaptive-icons)
+- [Developer Guide](#developer-guide)
+  - [Initial Setup](#initial-setup)
+  - [Running Tests](#running-tests)
+  - [Commit Messages](#commit-messages)
+  - [Creating a Release](#creating-a-release)
+  - [Builds](#builds)
+  - [Debugging](#debugging)
+- [The Sample Projects](#the-sample-projects)
+  - [React Native](#react-native)
+  - [Cordova](#cordova)
+  - [Native](#native)
+- [Compatibility](#compatibility)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
 
 <!-- vim-markdown-toc -->
 
@@ -60,18 +60,24 @@ You can also use the module directly in node:
  *   },
  * }
  */
-import appIcon from 'app-icon';
+import GenerateAppIcons from "@npt/generate-app-icons";
 
 Promise.resolve()
-  .then(() => appIcon.labelImage('./inputfile.png', './out.png', 'UAT', '0.12.3'))
-  .then(() => appIcon.labelImage('./inputfile.png', './out.png', 'UAT')) // Bottom text optional
-  .then(() => appIcon.labelImage('./inputfile.png', './out.png', null, '0.12.3')) // Top text optional
+  .then(() =>
+    appIcon.labelImage("./inputfile.png", "./out.png", "UAT", "0.12.3")
+  )
+  .then(() => appIcon.labelImage("./inputfile.png", "./out.png", "UAT")) // Bottom text optional
+  .then(() =>
+    appIcon.labelImage("./inputfile.png", "./out.png", null, "0.12.3")
+  ) // Top text optional
   .then(() => appIcon.generate()) // will use all default values
-  .then(() => appIcon.generate({
-    sourceIcon: './icon.png', // Path of the icon to use
-    platforms: 'android,ios', // The platforms to generate icons for (i.e. 'android')
-    search: './',
-  }));
+  .then(() =>
+    appIcon.generate({
+      sourceIcon: "./icon.png", // Path of the icon to use
+      platforms: "android,ios", // The platforms to generate icons for (i.e. 'android')
+      search: "./",
+    })
+  );
 ```
 
 ## Installation
@@ -178,7 +184,7 @@ There is an excellent guide on developing Adaptive Icons [here](https://medium.c
 
 To test how adaptive icons will look when animated, swiped, etc, the [Adaptive Icons](https://adapticon.tooo.io/) website by [Marius Claret](https://twitter.com/mariusclaret) is very useful!
 
-Note that Adaptive Icons of *all* supported sizes are generated. However, we also generate the `res/mipmap-anydpi-v26/` adaptive icon. This is a large size icon which Android from v26 onwards will automatically rescale as needed to all other sizes. This technically makes the density specific icons redundant. The reason we generate both is to ensure that after `generate` is run, *all* icons in the project will be consistent.
+Note that Adaptive Icons of _all_ supported sizes are generated. However, we also generate the `res/mipmap-anydpi-v26/` adaptive icon. This is a large size icon which Android from v26 onwards will automatically rescale as needed to all other sizes. This technically makes the density specific icons redundant. The reason we generate both is to ensure that after `generate` is run, _all_ icons in the project will be consistent.
 
 ## Developer Guide
 
@@ -187,7 +193,7 @@ The only dependencies are Node 10 (or above) and Yarn.
 Useful commands for development are:
 
 | Command              | Usage                                                                                    |
-|----------------------|------------------------------------------------------------------------------------------|
+| -------------------- | ---------------------------------------------------------------------------------------- |
 | `npm test`           | Runs the unit tests.                                                                     |
 | `npm run test:debug` | Runs the tests in a debugger. Combine with `.only` and `debugger` for ease of debugging. |
 | `npm run cov`        | Runs the tests, writing coverage reports to `./artifacts/coverage`.                      |
@@ -282,12 +288,12 @@ To run the native apps, open the `./test/NativeApp` directory, then open the iOS
 
 ## Compatibility
 
-`app-icon` dependds on [ImageMagick](https://www.imagemagick.org/). ImageMagick 6 is installed by default on many Linux distributions, as well as OSX. Some platforms are regularly tested (such as Ubuntu, via CircleCI). Other platforms *may* work but are not tested when I make a release, so your results may vary.
+`app-icon` dependds on [ImageMagick](https://www.imagemagick.org/). ImageMagick 6 is installed by default on many Linux distributions, as well as OSX. Some platforms are regularly tested (such as Ubuntu, via CircleCI). Other platforms _may_ work but are not tested when I make a release, so your results may vary.
 
 The table below shows the current confirmed compatibility:
 
 | Platform  | `app-icon` | ImageMagick | Status |
-|-----------|------------|-------------|--------|
+| --------- | ---------- | ----------- | ------ |
 | OSX       | `0.6.x`    | 6, 7        | ✅     |
 | Ubuntu 14 | `0.6.x`    | 6           | ✅     |
 
