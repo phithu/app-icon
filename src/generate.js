@@ -37,7 +37,7 @@ module.exports = async function generate(parameters) {
   }));
 
   const manifests = await findAndroidManifests(searchRoot);
-  console.log("manifests",manifests)
+
   await Promise.all(manifests.map(async (manifest) => {
     if (!platforms.includes('android')) {
       return null;
