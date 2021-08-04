@@ -8,7 +8,8 @@ const writeFileAsync = promisify(fs.writeFile);
 const BORDER_SIZE = 9;
 
 async function resizeImage(source, target, size) {
-  return imagemagickCli.exec(`convert "${source}" -resize ${size} -gravity center -bordercolor white -border ${BORDER_SIZE}x${BORDER_SIZE} -background white -strip "${target}"`);
+  return imagemagickCli.exec(`convert "${source}" -resize ${size} -strip "${target}"`);
+  // return imagemagickCli.exec(`convert "${source}" -resize ${size} -gravity center -bordercolor white -border ${BORDER_SIZE}x${BORDER_SIZE} -background white -strip "${target}"`);
 };
 
 //  Generate xCode icons given an iconset folder.
@@ -31,9 +32,11 @@ module.exports = async function generateIconSetIcons(sourceIcon, iconset) {
 
     const targetScale = parseInt(image.scale.slice(0, 1), 10);
 
-    const targetSize = image.size.split('x').
-      map((p) => Math.round(p * targetScale) - BORDER_SIZE * 2).
-      join('x');
+    // const targetSize = image.size.split('x').
+    //   map((p) => Math.round(p * targetScale) - BORDER_SIZE * 2).
+    //   join('x');
+
+    const targetSize = image.size.split('x').map((p) => Math.round(p * targetScale)).join('x');
 
     await resizeImage(sourceIcon, targetPath, targetSize);
     results.icons.push(targetName);

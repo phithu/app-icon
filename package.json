@@ -1,6 +1,6 @@
 {
   "name": "@npt/generate-app-icons",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Automatic icon resizing for Mobile Apps. Supports Native, Cordova and React Native. Inspired by cordova-icon.",
   "main": "./src/index.js",
   "engines": {
